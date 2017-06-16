@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import CauseAndEffectQuestion from './CauseAndEffectQuestion';
 import CheckAnswerButton from './CheckAnswerButton';
 
 export default class CauseAndEffectQuiz extends React.Component {
@@ -14,7 +15,9 @@ export default class CauseAndEffectQuiz extends React.Component {
             Cause and Effect
           </Text>
         </View>
-        <View style={styles.questionContainer} />
+        <View style={styles.questionContainer}>
+          <CauseAndEffectQuestion />
+        </View>
         <View style={styles.footerContainer}>
           <View style={styles.footerInfoContainer}>
             <Text style={styles.questionNumText}>
@@ -46,7 +49,8 @@ const styles = StyleSheet.create({
     fontWeight: '200'
   },
   questionContainer: {
-    flex: 1
+    flex: 1,
+    alignSelf: 'stretch'
   },
   footerContainer: {
     padding: 10,
