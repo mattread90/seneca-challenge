@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "eslint": "^4.0.0",
+    "eslint-plugin-react": "^7.1.0",
     "jest-expo": "~1.0.1",
     "react-native-scripts": "0.0.31",
     "react-test-renderer": "16.0.0-alpha.6"
