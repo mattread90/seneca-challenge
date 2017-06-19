@@ -8,22 +8,24 @@ export default class CauseAndEffectQuestion extends React.Component {
   render() {
     return (
       <View style={s.container}>
-        <CauseEffectBox type="cause" text="Interest rates rise" />
+        <CauseEffectBox type="cause" text="Interest rates rise..." />
         <FlowChartArrow />
         <AnswerSwiper
           renderInstructions={CauseEffectInstruction}
           renderAnswer={CauseEffectAnswer}
           answers={[
-            'Consumers buy more in the shops and festivals etc',
-            'Hot Money flows into the nation',
-            'Hot Money flows into the nation1',
-            'Hot Money flows into the nation2',
-            'Hot Money flows into the nation3'
+            '...consumers buy more in the shops and festivals etc...',
+            '...Hot Money flows into the nation...',
+            '...Hot Money flows into the nation1...',
+            '...Hot Money flows into the nation2...',
+            '...Hot Money flows into the nation3...'
           ]}
           onAnswerSelect={answer => console.log(answer)}
+          showDots
+          showArrows
         />
         <FlowChartArrow />
-        <CauseEffectBox type="effect" text="Currency exchange appreciates" />
+        <CauseEffectBox type="effect" text="...currency exchange appreciates" />
       </View>
     );
   }
@@ -138,7 +140,8 @@ const s = StyleSheet.create({
   },
   causeEffectBoxText: {
     fontSize: 18,
-    fontWeight: '200'
+    fontWeight: '200',
+    textAlign: 'center'
   },
   answerBox: {
     flex: 1,
@@ -146,15 +149,18 @@ const s = StyleSheet.create({
   },
   causeEffectAnswerText: {
     fontSize: 18,
+    fontWeight: '200',
     textAlign: 'center'
   },
   causeEffectInstructionText: {
     fontSize: 18,
+    color: 'gray',
     textAlign: 'center'
   },
   causeEffectInstructionHeader: {
     fontSize: 18,
-    fontWeight: 'bold',
+    color: 'gray',
+    fontWeight: '600',
     textAlign: 'center'
   },
   causeText: {
