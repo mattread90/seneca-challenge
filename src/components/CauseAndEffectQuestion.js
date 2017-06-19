@@ -10,6 +10,7 @@ export default class CauseAndEffectQuestion extends React.Component {
         <CauseEffectBox type="cause" text="Interest rates rise" />
         <View style={s.answerSwiperContainer}>
           <AnswerSwiper
+            renderInstructions={CauseEffectInstruction}
             renderAnswer={CauseEffectAnswer}
             answers={[
               'Consumers buy more in the shops and festivals etc',
@@ -18,6 +19,7 @@ export default class CauseAndEffectQuestion extends React.Component {
               'Hot Money flows into the nation2',
               'Hot Money flows into the nation3'
             ]}
+            onAnswerSelect={answer => console.log(answer)}
           />
         </View>
         <CauseEffectBox type="effect" text="Currency exchange appreciates" />
@@ -50,6 +52,19 @@ const CauseEffectAnswer = ({ text }) =>
     <View style={s.causeEffectBoxContent}>
       <Text style={s.causeEffectAnswerText}>
         {text}
+      </Text>
+    </View>
+  </View>;
+
+const CauseEffectInstruction = () =>
+  <View style={[s.causeEffectBoxContainer, s.answerBox]}>
+    <View style={s.causeEffectBoxContent}>
+      <Text style={s.causeEffectAnswerText}>
+        Instructions:
+      </Text>
+      <Text style={s.causeEffectInstructionText}>
+        Swipe left and right to select the correct link between the cause and
+        the effect
       </Text>
     </View>
   </View>;
@@ -110,6 +125,10 @@ const s = StyleSheet.create({
   causeEffectAnswerText: {
     fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  causeEffectInstructionText: {
+    fontSize: 18,
     textAlign: 'center'
   },
   content: {
