@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import colors from '../common/colors';
+
 export default class CheckAnswerButton extends React.Component {
   render() {
     return (
@@ -22,7 +24,7 @@ const s = StyleSheet.create({
     justifyContent: 'center',
     height: 60,
     padding: 10,
-    backgroundColor: '#59a9f9',
+    backgroundColor: colors.primaryBlue,
     borderRadius: 30
   },
   content: {
