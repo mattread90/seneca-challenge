@@ -18,7 +18,18 @@ export default class CauseAndEffectQuiz extends React.Component {
       ),
       currentQuestion: PropTypes.number.isRequired,
       currentAnswer: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    onAnswerSelect: PropTypes.func,
+    onConfirmAnswer: PropTypes.func
+  };
+
+  _confirmAnswer = () => {
+    const { quiz } = this.props;
+    this.props.onConfirmAnswer &&
+      this.props.onConfirmAnswer(
+        quiz.currentAnswer,
+        quiz.questions[quiz.currentQuestion].correctAnswer
+      );
   };
 
   render() {
@@ -30,7 +41,12 @@ export default class CauseAndEffectQuiz extends React.Component {
           </Text>
         </View>
         <View style={styles.questionContainer}>
-          <CauseAndEffectQuestion />
+          <CauseAndEffectQuestion
+            question={
+              this.props.quiz.questions[this.props.quiz.currentQuestion]
+            }
+            onAnswerSelect={this.props.onAnswerSelect}
+          />
         </View>
         <View style={styles.footerContainer}>
           <View style={styles.footerInfoContainer}>
@@ -39,9 +55,11 @@ export default class CauseAndEffectQuiz extends React.Component {
               {' '}{this.props.quiz.questions.length}
             </Text>
           </View>
-
           <View style={styles.submitButtonContainer}>
-            <CheckAnswerButton />
+            <CheckAnswerButton
+              onPress={this._confirmAnswer}
+              disabled={!this.props.quiz.currentAnswer}
+            />
           </View>
         </View>
       </View>

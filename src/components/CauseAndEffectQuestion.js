@@ -1,31 +1,69 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import AnswerSwiper from './AnswerSwiper';
 import colors from '../common/colors';
 
-export default class CauseAndEffectQuestion extends React.Component {
+export default class CauseAndEffectQuestion extends React.PureComponent {
+  static propTypes = {
+    question: PropTypes.shape({
+      cause: PropTypes.string.isRequired,
+      effect: PropTypes.string.isRequired,
+      wrongAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
+      correctAnswer: PropTypes.string.isRequired
+    }).isRequired,
+    onAnswerSelect: PropTypes.func
+  };
+
+  constructor(props) {
+    super(props);
+    this._shuffleAnswers([
+      ...props.question.wrongAnswers,
+      props.question.correctAnswer
+    ]);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._shuffleAnswers([
+      ...nextProps.question.wrongAnswers,
+      nextProps.question.correctAnswer
+    ]);
+  }
+
+  _shuffleAnswers = answers => {
+    let currentIndex = answers.length,
+      tempVal,
+      randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      tempVal = answers[currentIndex];
+      answers[currentIndex] = answers[randomIndex];
+      answers[currentIndex] = tempVal;
+    }
+
+    this._shuffledAnswers = answers;
+  };
+
   render() {
+    const { cause, effect, wrongAnswers, correctAnswer } = this.props.question;
     return (
       <View style={s.container}>
-        <CauseEffectBox type="cause" text="Interest rates rise..." />
+        <CauseEffectBox type="cause" text={cause} />
         <FlowChartArrow />
         <AnswerSwiper
           renderInstructions={CauseEffectInstruction}
           renderAnswer={CauseEffectAnswer}
-          answers={[
-            '...consumers buy more in the shops and festivals etc...',
-            '...Hot Money flows into the nation...',
-            '...Hot Money flows into the nation1...',
-            '...Hot Money flows into the nation2...',
-            '...Hot Money flows into the nation3...'
-          ]}
-          onAnswerSelect={answer => console.log(answer)}
+          answers={this._shuffledAnswers}
+          onAnswerSelect={this.props.onAnswerSelect}
           showDots
           showArrows
         />
         <FlowChartArrow />
-        <CauseEffectBox type="effect" text="...currency exchange appreciates" />
+        <CauseEffectBox type="effect" text={effect} />
       </View>
     );
   }

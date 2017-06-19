@@ -5,8 +5,8 @@ import {
   CONFIRM_ANSWER
 } from '../actions';
 
-export default (state, action) => {
-  switch (action.payload) {
+export default (state = {}, action) => {
+  switch (action.type) {
     case INIT_QUIZ: {
       return {
         questions: action.payload.questions,
@@ -27,5 +27,7 @@ export default (state, action) => {
         currentAnswer: action.payload.answer
       };
     }
+    default:
+      return state;
   }
 };

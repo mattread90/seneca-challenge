@@ -1,14 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import colors from '../common/colors';
 
-export default class CheckAnswerButton extends React.Component {
+export default class CheckAnswerButton extends React.PureComponent {
+  static propTypes = {
+    onPress: PropTypes.func,
+    disabled: PropTypes.bool
+  };
+
   render() {
     return (
-      <TouchableOpacity style={s.button}>
+      <TouchableOpacity
+        style={[s.button, this.props.disabled && s.disabled]}
+        onPress={this.props.onPress}
+        disabled={this.props.disabled}
+      >
         <View style={s.content}>
-          <Text style={s.text}>
+          <Text style={this.props.disabled ? s.disabledText : s.text}>
             Check answer
           </Text>
         </View>
@@ -36,5 +46,13 @@ const s = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'normal',
     color: 'white'
+  },
+  disabled: {
+    backgroundColor: 'gray'
+  },
+  disabledText: {
+    fontSize: 25,
+    fontWeight: 'normal',
+    color: 'lightgray'
   }
 });
