@@ -1,11 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import CauseAndEffectQuestion from './CauseAndEffectQuestion';
 import CheckAnswerButton from './CheckAnswerButton';
 
 export default class CauseAndEffectQuiz extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    quiz: PropTypes.shape({
+      questions: PropTypes.arrayOf(
+        PropTypes.shape({
+          cause: PropTypes.string.isRequired,
+          effect: PropTypes.string.isRequired,
+          wrongAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
+          correctAnswer: PropTypes.string.isRequired
+        }).isRequired
+      ),
+      currentQuestion: PropTypes.number.isRequired,
+      currentAnswer: PropTypes.string
+    }).isRequired
+  };
 
   render() {
     return (
@@ -21,7 +35,8 @@ export default class CauseAndEffectQuiz extends React.Component {
         <View style={styles.footerContainer}>
           <View style={styles.footerInfoContainer}>
             <Text style={styles.questionNumText}>
-              Question 1 / 4
+              Question {this.props.quiz.currentQuestion + 1} /
+              {' '}{this.props.quiz.questions.length}
             </Text>
           </View>
 
