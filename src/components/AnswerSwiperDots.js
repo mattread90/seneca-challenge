@@ -24,7 +24,8 @@ const s = StyleSheet.create({
     height: 8,
     flexDirection: 'row',
     alignSelf: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 5
   },
   dot: {
     height: 4,

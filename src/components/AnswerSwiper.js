@@ -133,7 +133,6 @@ const EndBuffer = () => <View style={{ width: 30 }} />;
 const s = StyleSheet.create({
   container: {
     flex: 1
-    // alignItems: 'center'
   },
   list: {
     overflow: 'visible'

@@ -2,26 +2,27 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import AnswerSwiper from './AnswerSwiper';
+import colors from '../common/colors';
 
 export default class CauseAndEffectQuestion extends React.Component {
   render() {
     return (
       <View style={s.container}>
         <CauseEffectBox type="cause" text="Interest rates rise" />
-        <View style={s.answerSwiperContainer}>
-          <AnswerSwiper
-            renderInstructions={CauseEffectInstruction}
-            renderAnswer={CauseEffectAnswer}
-            answers={[
-              'Consumers buy more in the shops and festivals etc',
-              'Hot Money flows into the nation',
-              'Hot Money flows into the nation1',
-              'Hot Money flows into the nation2',
-              'Hot Money flows into the nation3'
-            ]}
-            onAnswerSelect={answer => console.log(answer)}
-          />
-        </View>
+        <FlowChartArrow />
+        <AnswerSwiper
+          renderInstructions={CauseEffectInstruction}
+          renderAnswer={CauseEffectAnswer}
+          answers={[
+            'Consumers buy more in the shops and festivals etc',
+            'Hot Money flows into the nation',
+            'Hot Money flows into the nation1',
+            'Hot Money flows into the nation2',
+            'Hot Money flows into the nation3'
+          ]}
+          onAnswerSelect={answer => console.log(answer)}
+        />
+        <FlowChartArrow />
         <CauseEffectBox type="effect" text="Currency exchange appreciates" />
       </View>
     );
@@ -33,7 +34,7 @@ const CauseEffectBox = ({ type, text }) =>
     <View
       style={[
         s.causeEffectBoxTitleContainer,
-        type === 'effect' && s.effectAlign
+        type === 'cause' ? s.causeStyle : s.effectStyle
       ]}
     >
       <Text style={s.causeEffectBoxTitleText}>
@@ -49,6 +50,11 @@ const CauseEffectBox = ({ type, text }) =>
 
 const CauseEffectAnswer = ({ text }) =>
   <View style={[s.causeEffectBoxContainer, s.answerBox]}>
+    <View style={[s.causeEffectBoxTitleContainer, s.linkStyle]}>
+      <Text style={s.causeEffectBoxTitleText}>
+        Link
+      </Text>
+    </View>
     <View style={s.causeEffectBoxContent}>
       <Text style={s.causeEffectAnswerText}>
         {text}
@@ -59,14 +65,23 @@ const CauseEffectAnswer = ({ text }) =>
 const CauseEffectInstruction = () =>
   <View style={[s.causeEffectBoxContainer, s.answerBox]}>
     <View style={s.causeEffectBoxContent}>
-      <Text style={s.causeEffectAnswerText}>
+      <Text style={s.causeEffectInstructionHeader}>
         Instructions:
       </Text>
       <Text style={s.causeEffectInstructionText}>
-        Swipe left and right to select the correct link between the cause and
-        the effect
+        Swipe to select the correct
+        <Text style={s.linkText}> link </Text>
+        between the
+        <Text style={s.causeText}> cause </Text>
+        and the
+        <Text style={s.effectText}> effect </Text>
       </Text>
     </View>
+  </View>;
+
+const FlowChartArrow = () =>
+  <View style={s.flowChartArrowContainer}>
+    <Text style={{ fontSize: 30 }}>⬇️</Text>
   </View>;
 
 const s = StyleSheet.create({
@@ -77,9 +92,9 @@ const s = StyleSheet.create({
     justifyContent: 'space-between'
   },
   causeEffectBoxContainer: {
-    margin: 10,
+    marginHorizontal: 10,
+    marginVertical: 2,
     backgroundColor: 'white',
-    // borderWidth: 0.2,
     borderRadius: 10
   },
   causeEffectBoxHeight: {
@@ -90,14 +105,25 @@ const s = StyleSheet.create({
     width: 60,
     height: CAUSE_EFFECT_TITLE_HEIGHT,
     alignItems: 'center',
-    padding: 2,
+    padding: 2
+  },
+  causeStyle: {
     borderTopLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: 'limegreen'
+    backgroundColor: colors.causeAndEffectCause
   },
-  effectAlign: {
+  effectStyle: {
     right: 0,
-    bottom: 0
+    bottom: 0,
+    borderTopLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: colors.causeAndEffectEffect
+  },
+  linkStyle: {
+    alignSelf: 'center',
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: colors.causeAndEffectLink
   },
   causeEffectBoxTitleText: {
     fontWeight: '100',
@@ -114,22 +140,34 @@ const s = StyleSheet.create({
     fontSize: 18,
     fontWeight: '200'
   },
-  answerSwiperContainer: {
-    flex: 1
-  },
   answerBox: {
     flex: 1,
-    alignSelf: 'stretch',
-    height: 80
+    marginHorizontal: 5
   },
   causeEffectAnswerText: {
     fontSize: 18,
-    fontWeight: 'bold',
     textAlign: 'center'
   },
   causeEffectInstructionText: {
     fontSize: 18,
     textAlign: 'center'
+  },
+  causeEffectInstructionHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  causeText: {
+    fontWeight: 'bold',
+    color: colors.causeAndEffectCause
+  },
+  linkText: {
+    fontWeight: 'bold',
+    color: colors.causeAndEffectLink
+  },
+  effectText: {
+    fontWeight: 'bold',
+    color: colors.causeAndEffectEffect
   },
   content: {
     flex: 1,
@@ -140,6 +178,10 @@ const s = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'normal',
     color: 'white'
+  },
+  flowChartArrowContainer: {
+    alignSelf: 'center',
+    margin: 5
   }
 });
 
