@@ -32,7 +32,9 @@ export default class CauseAndEffectQuestion extends React.PureComponent {
   }
 
   _shuffleAnswers = answers => {
-    let currentIndex = answers.length,
+    this._shuffledAnswers = [...answers];
+
+    let currentIndex = this._shuffledAnswers.length,
       tempVal,
       randomIndex;
 
@@ -40,12 +42,10 @@ export default class CauseAndEffectQuestion extends React.PureComponent {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
-      tempVal = answers[currentIndex];
-      answers[currentIndex] = answers[randomIndex];
-      answers[currentIndex] = tempVal;
+      tempVal = this._shuffledAnswers[currentIndex];
+      this._shuffledAnswers[currentIndex] = this._shuffledAnswers[randomIndex];
+      this._shuffledAnswers[randomIndex] = tempVal;
     }
-
-    this._shuffledAnswers = answers;
   };
 
   render() {
