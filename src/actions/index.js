@@ -1,3 +1,5 @@
+import sampleQuestions from '../../questions';
+
 export const INIT_QUIZ = 'INIT_QUIZ';
 export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const SELECT_ANSWER = 'SELECT_ANSWER';
@@ -14,7 +16,9 @@ export const CORRECT_STATES = {
 
 import {
   getSelectedAnswer,
-  getCorrectAnswerForCurrentQuestion
+  getCorrectAnswerForCurrentQuestion,
+  getCurrentQuestionIndex,
+  getTotalQuestions
 } from '../selectors';
 
 export function initQuiz(questions) {
@@ -75,8 +79,12 @@ export function checkAnswer() {
     if (
       getSelectedAnswer(state) === getCorrectAnswerForCurrentQuestion(state)
     ) {
-      dispatch(nextQuestion());
       dispatch(submitCorrectAnswer());
+      if (getCurrentQuestionIndex(state) < getTotalQuestions(state) - 1) {
+        dispatch(nextQuestion());
+      } else {
+        dispatch(initQuiz(sampleQuestions));
+      }
     } else {
       dispatch(submitWrongAnswer());
     }

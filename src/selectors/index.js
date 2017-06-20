@@ -11,9 +11,17 @@ export function getCorrectAnswerForCurrentQuestion(state) {
 }
 
 export function getCurrentQuestion(state) {
-  return getQuiz(state).questions[getQuiz(state).currentQuestion];
+  return getQuiz(state).questions[getCurrentQuestionIndex(state)];
+}
+
+export function getCurrentQuestionIndex(state) {
+  return getQuiz(state).currentQuestion;
 }
 
 export function getCorrectState(state) {
   return state.ui.correctState;
+}
+
+export function getTotalQuestions(state) {
+  return getQuiz(state).questions.length;
 }
