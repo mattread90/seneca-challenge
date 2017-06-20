@@ -194,7 +194,8 @@ const BUFFER_WIDTH = HORIZONTAL_INSET / 2;
 
 const s = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    overflow: 'hidden'
   },
   innerContainer: {
     flex: 1
