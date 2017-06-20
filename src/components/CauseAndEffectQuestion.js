@@ -109,12 +109,13 @@ const CauseEffectInstruction = () =>
         Instructions:
       </Text>
       <Text style={s.causeEffectInstructionText}>
-        Swipe to select the correct
+        Swipe here to select the correct
         <Text style={s.linkText}> link </Text>
         between the
         <Text style={s.causeText}> cause </Text>
         and the
-        <Text style={s.effectText}> effect </Text>
+        <Text style={s.effectText}> effect </Text>.
+        Then tap the 'Check answer' button below.
       </Text>
     </View>
   </View>;
@@ -177,8 +178,8 @@ const s = StyleSheet.create({
     paddingHorizontal: CAUSE_EFFECT_TITLE_HEIGHT + 5
   },
   causeEffectBoxText: {
-    fontSize: 18,
-    fontWeight: '200',
+    fontSize: 21,
+    fontWeight: '400',
     textAlign: 'center'
   },
   answerBox: {
@@ -186,8 +187,8 @@ const s = StyleSheet.create({
     marginHorizontal: 5
   },
   causeEffectAnswerText: {
-    fontSize: 18,
-    fontWeight: '200',
+    fontSize: 21,
+    fontWeight: '400',
     textAlign: 'center'
   },
   causeEffectInstructionText: {
