@@ -1,9 +1,4 @@
-import {
-  INIT_QUIZ,
-  NEXT_QUESTION,
-  SELECT_ANSWER,
-  CONFIRM_ANSWER
-} from '../actions';
+import { INIT_QUIZ, NEXT_QUESTION, SELECT_ANSWER } from '../actions';
 
 export default (state = {}, action) => {
   switch (action.type) {

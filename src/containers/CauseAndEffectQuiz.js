@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 
-import { getQuiz } from '../selectors';
-import { selectAnswer, confirmAnswer, nextQuestion } from '../actions';
+import { getQuiz, getCorrectState } from '../selectors';
+import { selectAnswer, checkAnswer, nextQuestion } from '../actions';
 import CauseAndEffectQuiz from '../components/CauseAndEffectQuiz';
 
 const mapStateToProps = state => {
   return {
-    quiz: getQuiz(state)
+    quiz: getQuiz(state),
+    correctState: getCorrectState(state)
   };
 };
 
@@ -15,11 +16,7 @@ const mapDispatchToProps = dispatch => {
     onAnswerSelect: answer => {
       dispatch(selectAnswer(answer));
     },
-    onConfirmAnswer: (answer, correctAnswer) => {
-      if (answer === correctAnswer) {
-        dispatch(nextQuestion());
-      }
-    }
+    onConfirmAnswer: () => dispatch(checkAnswer())
   };
 };
 

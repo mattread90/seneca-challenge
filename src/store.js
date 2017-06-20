@@ -1,10 +1,11 @@
-import { createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
-import quiz from './reducers/quiz';
+import reducer from './reducers';
 import { initQuiz } from './actions';
 import questions from '../questions';
 
-const store = createStore(combineReducers({ quiz }));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 store.dispatch(initQuiz(questions));
 
