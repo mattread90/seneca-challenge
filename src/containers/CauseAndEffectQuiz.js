@@ -13,9 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAnswerSelect: answer => {
-      dispatch(selectAnswer(answer));
-    },
+    onAnswerSelect: answer => dispatch(selectAnswer(answer)),
     onConfirmAnswer: () => dispatch(checkAnswer())
   };
 };

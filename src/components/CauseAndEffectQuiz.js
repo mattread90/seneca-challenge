@@ -2,8 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
+import { Constants } from 'expo';
+
 import CauseAndEffectQuestion from './CauseAndEffectQuestionTransitioner';
 import CheckAnswerButton from './CheckAnswerButton';
+import colors from '../common/colors';
 
 export default class CauseAndEffectQuiz extends React.Component {
   static propTypes = {
@@ -29,8 +32,14 @@ export default class CauseAndEffectQuiz extends React.Component {
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>
-            Cause and Effect
+            Cause and Effect quiz
           </Text>
+          <View style={styles.footerInfoContainer}>
+            <Text style={styles.questionNumText}>
+              Question {this.props.quiz.currentQuestion + 1} /
+              {' '}{this.props.quiz.questions.length}
+            </Text>
+          </View>
         </View>
         <View style={styles.questionContainer}>
           <CauseAndEffectQuestion
@@ -41,12 +50,6 @@ export default class CauseAndEffectQuiz extends React.Component {
           />
         </View>
         <View style={styles.footerContainer}>
-          <View style={styles.footerInfoContainer}>
-            <Text style={styles.questionNumText}>
-              Question {this.props.quiz.currentQuestion + 1} /
-              {' '}{this.props.quiz.questions.length}
-            </Text>
-          </View>
           <View style={styles.submitButtonContainer}>
             <CheckAnswerButton
               onPress={this.props.onConfirmAnswer}
@@ -64,11 +67,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 20,
-    backgroundColor: '#e6f0fa'
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: colors.background
   },
   headerContainer: {
-    padding: 10
+    padding: 5,
+    alignItems: 'center'
   },
   headerText: {
     fontSize: 25,

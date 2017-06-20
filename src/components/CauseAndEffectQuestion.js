@@ -104,7 +104,7 @@ const CauseEffectAnswer = ({ text }) =>
 
 const CauseEffectInstruction = () =>
   <View style={[s.causeEffectBoxContainer, s.answerBox]}>
-    <View style={s.causeEffectBoxContent}>
+    <View style={[s.causeEffectBoxContent, s.instructionsContainer]}>
       <Text style={s.causeEffectInstructionHeader}>
         Instructions:
       </Text>
@@ -125,6 +125,8 @@ const FlowChartArrow = () =>
     <Text style={{ fontSize: 30 }}>⬇️</Text>
   </View>;
 
+const CAUSE_EFFECT_TITLE_HEIGHT = 21;
+
 const s = StyleSheet.create({
   container: {
     alignSelf: 'stretch',
@@ -133,7 +135,7 @@ const s = StyleSheet.create({
     justifyContent: 'space-between'
   },
   causeEffectBoxContainer: {
-    marginHorizontal: 10,
+    marginHorizontal: 35,
     marginVertical: 2,
     backgroundColor: 'white',
     borderRadius: 10
@@ -146,24 +148,19 @@ const s = StyleSheet.create({
     width: 60,
     height: CAUSE_EFFECT_TITLE_HEIGHT,
     alignItems: 'center',
-    padding: 2
-  },
-  causeStyle: {
+    padding: 2,
+    zIndex: 1,
     alignSelf: 'center',
     borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderBottomRightRadius: 10
+  },
+  causeStyle: {
     backgroundColor: colors.causeAndEffectCause
   },
   effectStyle: {
-    alignSelf: 'center',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
     backgroundColor: colors.causeAndEffectEffect
   },
   linkStyle: {
-    alignSelf: 'center',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
     backgroundColor: colors.causeAndEffectLink
   },
   causeEffectBoxTitleText: {
@@ -175,7 +172,10 @@ const s = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    paddingHorizontal: CAUSE_EFFECT_TITLE_HEIGHT + 5
+    paddingTop: CAUSE_EFFECT_TITLE_HEIGHT
+  },
+  instructionsContainer: {
+    paddingTop: 10
   },
   causeEffectBoxText: {
     fontSize: 21,
@@ -229,5 +229,3 @@ const s = StyleSheet.create({
     margin: 5
   }
 });
-
-const CAUSE_EFFECT_TITLE_HEIGHT = 18;
