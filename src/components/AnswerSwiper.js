@@ -60,7 +60,7 @@ export default class AnswerSwiper extends React.Component {
       ? this.props.renderInstructions()
       : this.props.renderAnswer(item);
     return (
-      <View style={[s.answerWrapper, { width: this.state.screenWidth - 60 }]}>
+      <View style={[s.answerWrapper, { width: this._answerWidth() }]}>
         {toRender}
       </View>
     );
@@ -70,7 +70,7 @@ export default class AnswerSwiper extends React.Component {
     // This stops user scrolling past the last item
     if (
       e.nativeEvent.contentOffset.x >
-      30 + (this.state.screenWidth - 60) * (this.state.answers.length - 1)
+      BUFFER_WIDTH + this._answerWidth() * (this.state.answers.length - 1)
     ) {
       this.setState({ overscrolled: true });
       this._list.scrollToIndex({
@@ -82,8 +82,8 @@ export default class AnswerSwiper extends React.Component {
 
   _getItemLayout = (data, index) => {
     return {
-      length: this.state.screenWidth - 60,
-      offset: (this.state.screenWidth - 60) * index,
+      length: this._answerWidth(),
+      offset: this._answerWidth() * index,
       index
     };
   };
@@ -97,7 +97,7 @@ export default class AnswerSwiper extends React.Component {
     const instructionsModifier = this.props.renderInstructions ? 1 : 0;
 
     const index = Math.floor(
-      e.nativeEvent.contentOffset.x / (this.state.screenWidth - 60)
+      e.nativeEvent.contentOffset.x / this._answerWidth()
     );
     const answerIndex = index - instructionsModifier;
 
@@ -127,13 +127,15 @@ export default class AnswerSwiper extends React.Component {
 
   _listRef = ref => (this._list = ref);
 
+  _answerWidth = () => this.state.screenWidth - HORIZONTAL_INSET;
+
   render() {
     return (
       <View style={s.container}>
         <View style={s.innerContainer}>
           <FlatList
             ref={this._listRef}
-            style={[s.list, { width: this.state.screenWidth - 60 }]}
+            style={[s.list, { width: this._answerWidth() }]}
             ListHeaderComponent={EndBuffer}
             renderItem={this._renderItem}
             data={this.state.answers}
@@ -170,7 +172,7 @@ export default class AnswerSwiper extends React.Component {
   }
 }
 
-const EndBuffer = () => <View style={{ width: 30 }} />;
+const EndBuffer = () => <View style={{ width: BUFFER_WIDTH }} />;
 
 const ArrowButton = ({ left, onPress, disabled }) =>
   <TouchableOpacity
@@ -186,6 +188,9 @@ const ArrowButton = ({ left, onPress, disabled }) =>
       />
     </View>
   </TouchableOpacity>;
+
+const HORIZONTAL_INSET = 60;
+const BUFFER_WIDTH = HORIZONTAL_INSET / 2;
 
 const s = StyleSheet.create({
   container: {
