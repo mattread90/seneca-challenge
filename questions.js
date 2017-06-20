@@ -1,7 +1,7 @@
 export default [
   {
     cause: 'Interest rates rise...',
-    effect: '...currency exchance appreciates',
+    effect: '...currency exchange appreciates',
     wrongAnswers: [
       '...consumers buy more in the shops...',
       '...consumers spend less and save more...'
@@ -10,7 +10,7 @@ export default [
   },
   {
     cause: 'Interest rates fall...',
-    effect: '...currency exchance depreciates',
+    effect: '...currency exchange depreciates',
     wrongAnswers: [
       '...consumers spend more and save less...',
       '...consumers buy less in the shops...'
