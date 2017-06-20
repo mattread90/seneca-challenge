@@ -62,8 +62,8 @@ export default class CauseAndEffectQuestionTransitioner extends React.Component 
     this.state[nextQuestionKey].shift.setValue(this._screenWidth);
 
     Animated.sequence([
-      Animated.delay(500),
-      Animated.stagger(500, [
+      Animated.delay(700),
+      Animated.stagger(300, [
         Animated.spring(this.state[currentQuestionKey].shift, {
           toValue: -this._screenWidth
         }),
