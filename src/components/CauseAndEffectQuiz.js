@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-import CauseAndEffectQuestion from './CauseAndEffectQuestion';
+import CauseAndEffectQuestion from './CauseAndEffectQuestionTransitioner';
 import CheckAnswerButton from './CheckAnswerButton';
 
 export default class CauseAndEffectQuiz extends React.Component {

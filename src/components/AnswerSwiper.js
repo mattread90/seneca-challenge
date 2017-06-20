@@ -143,6 +143,7 @@ export default class AnswerSwiper extends React.Component {
             onMomentumScrollEnd={this._onScrollMomentumEnd}
             getItemLayout={this._getItemLayout}
             showsHorizontalScrollIndicator={false}
+            removeClippedSubviews={false}
           />
           {this.props.showArrows &&
             <ArrowButton
