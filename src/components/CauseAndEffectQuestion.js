@@ -148,14 +148,14 @@ const s = StyleSheet.create({
     padding: 2
   },
   causeStyle: {
-    borderTopLeftRadius: 10,
+    alignSelf: 'center',
+    borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     backgroundColor: colors.causeAndEffectCause
   },
   effectStyle: {
-    right: 0,
-    bottom: 0,
-    borderTopLeftRadius: 10,
+    alignSelf: 'center',
+    borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     backgroundColor: colors.causeAndEffectEffect
   },
